@@ -1,5 +1,5 @@
 local math = require('math')
-local history = {}
+history = {}
 
 local function run(msg, matches)
   value = math.random(1, 6)
