@@ -12,13 +12,13 @@ local function get_variables_hash(msg)
   end
 end
 
-local function get_int_value(redis_value)
+local function get_int_value(redis_value, hash)
   if not redis_value then
-      redis:hset(hash, name, counter_start)
+    redis:hset(hash, name, counter_start)
     return counter_start
   end
 
-  local int_value = redis_value
+  local int_value = tonumber(redis_value)
   if not int_value or int_value < 1 then
     return counter_start
   end
@@ -28,13 +28,11 @@ end
 
 local function run(msg, matches)
   local hash = get_variables_hash(msg)
-
   name = msg.from.first_name
   if name == "" then
     name = "pedazo de mierda"
   end
-
-  local counter = get_int_value(redis:hget(hash, name))
+  local counter = get_int_value(redis:hget(hash, name), hash)
 
   value = math.random(1, max_prob)
   print ('max_prob: '..max_prob)  
