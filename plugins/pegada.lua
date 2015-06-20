@@ -47,6 +47,7 @@ local function run(msg, matches)
 
   if value == 1 then
     print ('Pegándosela a '..name..'.')
+    redis:hset(hash, name, counter_start)
     return 'Cállate, '..name..', por favor.'
   end
 end
