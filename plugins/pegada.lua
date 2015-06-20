@@ -54,7 +54,7 @@ end
 
 return {
   description = "El plugin de Dios de la Peñita",
-  usage = "La pega de vez en cuando. Usa la variable 'pegada_max_prob' para configurar la frecuencia.",
+  usage = "La pega de vez en cuando.",
   patterns = {
     "..*"
   }, 
