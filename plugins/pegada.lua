@@ -5,10 +5,10 @@ local counter_flag = 5
 
 local function get_variables_hash(msg)
   if msg.to.type == 'chat' then
-    return 'chat:'..msg.to.id..':variables'
+    return 'chat:'..msg.to.id..':pegada'
   end
   if msg.to.type == 'user' then
-    return 'user:'..msg.from.id..':variables'
+    return 'user:'..msg.from.id..':pegada'
   end
 end
 
