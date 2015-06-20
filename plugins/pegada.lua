@@ -35,6 +35,8 @@ local function run(msg, matches)
   local counter = get_int_value(redis:hget(hash, name), hash)
 
   value = math.random(1, max_prob)
+  print('name:'..name)
+  print('counter:'..counter)
   print ('max_prob: '..max_prob)  
 
   if counter < counter_flag then
