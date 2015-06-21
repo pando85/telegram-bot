@@ -6,7 +6,7 @@ local function run(msg, matches)
     value = math.random(1, max_prob)
 
     if value == 1 then
-        msg_search(get_receiver(msg), matches[1], forwardinglib:search_callback, msg)
+        msg_search(get_receiver(msg), matches[1], forwardinglib.search_callback, msg)
     end
 end
 

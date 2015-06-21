@@ -21,7 +21,7 @@ local function get_appropriate_message(messages, original)
   return filtered_table[selected_index]
 end
 
-function forwardinglib:search_callback(cb_extra, success, result)
+function forwardinglib.search_callback(cb_extra, success, result)
   if success == 0 then
     print('failed: '..cb_extra)
     return
