@@ -1,6 +1,6 @@
 --local table = require "table"
 local math = require('math')
-local forwardinglib = require('forwardinglib')
+local forwardinglib = (loadfile "./libs/forwardinglib.lua")()
 
 local function run(msg, matches)
   local nb_messages = tonumber(matches[1])

@@ -1,5 +1,6 @@
-local forwardinglib = require('forwardinglib')
 local math = require('math')
+local forwardinglib = (loadfile "./libs/forwardinglib.lua")()
+
 local max_prob = 20
 
 local function run(msg, matches)
