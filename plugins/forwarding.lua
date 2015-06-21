@@ -1,16 +1,15 @@
 --local table = require "table"
 local math = require('math')
-local forwardinglib = (loadfile "./libs/forwardinglib.lua")()
 
 local function run(msg, matches)
   local nb_messages = tonumber(matches[1])
 
   if not nb_messages then
-    if not msg_search(get_receiver(msg), matches[1], forwardinglib.search_callback, msg) then
+    if not msg_search(get_receiver(msg), matches[1], forwardinglib:search_callback, msg) then
       return 'Failed!'
     end
   else
-    if not get_history(get_receiver(msg), nb_messages, forwardinglib.search_callback, msg) then
+    if not get_history(get_receiver(msg), nb_messages, forwardinglib:search_callback, msg) then
       return 'Failed!'
     end
   end
