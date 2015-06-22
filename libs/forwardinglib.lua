@@ -1,4 +1,4 @@
-do 
+do
 local forwardinglib = {}
 
 local math = require('math')
@@ -6,19 +6,19 @@ local math = require('math')
 local function get_appropriate_message(messages, original)
   local filtered_table = {}
 
-  local j = 0
-  for i = 0, #messages do
-    if messages[i].text ~= original.text then
-        filtered_table[j] = messages[i]
-        j = j + 1
+  while #filtered_table ~= #messages do
+    local random_index = math.random(0, #messages)
+
+    if not filtered_table[random_index] then
+      if messages[random_index].text ~= original.text then
+        return messages[random_index]
+      else
+        filtered_table[random_index] = true
+      end
     end
   end
-  if j == 0 then
-    return false
-  end
 
-  local selected_index = math.random(0, #filtered_table)
-  return filtered_table[selected_index]
+  return false
 end
 
 function forwardinglib.search_callback(cb_extra, success, result)
