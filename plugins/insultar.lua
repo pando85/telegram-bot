@@ -13,6 +13,14 @@ end
 
 local targets = Set {33698741}
 
+local function calculate_size(array)
+  local count = 0
+  for Index, Value in pairs( array ) do
+    count = count + 1
+  end
+  return count
+end
+
 local function get_variables_hash(msg)
   if msg.to.type == 'chat' then
     return 'chat:'..msg.to.id..':pegada'
@@ -59,7 +67,7 @@ local function run(msg, matches)
 
   if (value == 1 and targets[user_id]) then
     print ('Insultando a '..name..'.')
-    value = math.random(1, table.getn(insultos))
+    value = math.random(1, calculate_size(insultos))
     redis:hset(hash, name, counter_start)
     return 'Que pasa '..name..' pareces el típico '..insultos[value]'.'
   end
