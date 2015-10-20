@@ -1,6 +1,6 @@
 local math = require('math')
 local counter_start = 0
-local max_prob = 1
+local max_prob = 2
 local counter_flag = 1
 local targets = {"33698741", "7055881"}
 
@@ -30,8 +30,6 @@ end
 local function run(msg, matches)
   local hash = get_variables_hash(msg)
   name = msg.from.first_name
-  user_id = msg.from.id
-
   if name == "" then
     name = "pedazo de mierda"
   end
@@ -49,6 +47,7 @@ local function run(msg, matches)
 
   redis:hset(hash, name, counter + 1)
 
+  user_id = msg.from.id
   if (value == 1 and user_id in targets) then
     print ('Pegándosela a '..name..'.')
     redis:hset(hash, name, counter_start)
