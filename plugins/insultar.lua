@@ -1,8 +1,8 @@
 local math = require('math')
 local counter_start = 0
-local max_prob = 4
-local counter_flag = 5
-local targets = {33698741, 7055881}
+local max_prob = 1
+local counter_flag = 1
+local targets = {"33698741", "7055881"}
 
 local function get_variables_hash(msg)
   if msg.to.type == 'chat' then
@@ -38,6 +38,7 @@ local function run(msg, matches)
   local counter = get_int_value(redis:hget(hash, name), hash)
 
   value = math.random(1, max_prob)
+  print('user:'..user)
   print('name:'..name)
   print('counter:'..counter)
   print ('max_prob: '..max_prob)  
