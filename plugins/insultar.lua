@@ -51,7 +51,7 @@ local function run(msg, matches)
   if (value == 1 and user_id in targets) then
     print ('Pegándosela a '..name..'.')
     redis:hset(hash, name, counter_start)
-    return ..name..', muerete por favor.'
+    return ' '..name..', muerete por favor.'
   end
 end
 
