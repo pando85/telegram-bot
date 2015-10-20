@@ -30,7 +30,7 @@ end
 local function run(msg, matches)
   local hash = get_variables_hash(msg)
   name = msg.from.first_name
-  user = msg.from.user
+  user = msg.from.id
 
   if name == "" then
     name = "pedazo de mierda"
