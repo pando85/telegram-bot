@@ -2,13 +2,16 @@ local math = require('math')
 local counter_start = 0
 local max_prob = 2
 local counter_flag = 1
-local targets = Set {"33698741", "7055881"}
 
-function Set (list)
+local insultos = {"abanto","abrazafarolas","adufe","alcornoque","alfeñique","andurriasmo","arrastracueros","artabán","atarre","baboso","barrabás","barriobajero","bebecharcos","bellaco","belloto","berzotas","besugo","bobalicón","bocabuzón","bocachancla","bocallanta","boquimuelle","borrico","botarate","brasas","cabestro","cabezaalberca","cabezabuque","cachibache","cafre","cagalindes","cagarruta","calambuco","calamidad","caldúo","calientahielos","calzamonas","cansalmas","cantamañanas","capullo","caracaballo","caracartón","caraculo","caraflema","carajaula","carajote","carapapa","carapijo","cazurro","cebollino","cenizo","cenutrio","ceporro","cernícalo","charrán","chiquilicuatre","chirimbaina","chupacables","chupasangre","chupóptero","cierrabares","cipote","comebolsas","comechapas","comeflores","comestacas","cretino","cuerpoescombro","culopollo","descerebrado","desgarracalzas","dondiego","donnadie","echacantos","ejarramantas","energúmeno","esbaratabailes","escolimoso","escornacabras","estulto","fanfosquero","fantoche","fariseo","filimincias","foligoso","fulastre","ganapán","ganapio","gandúl","gañán","gaznápiro","gilipuertas","giraesquinas","gorrino","gorrumino","guitarro","gurriato","habahelá","huelegatera","huevón","lamecharcos","lameculos","lameplatos","lechuguino","lerdo","letrín","lloramigas","longanizas","lumbreras","maganto","majadero","malasangre","malasombra","malparido","mameluco","mamporrero","manegueta","mangarrán","mangurrián","mastuerzo","matacandiles","meapilas","melón","mendrugo","mentecato","mequetrefe","merluzo","metemuertos","metijaco","mindundi","morlaco","morroestufa","muerdesartenes","orate","ovejo","pagafantas","palurdo","pamplinas","panarra","panoli","papafrita","papanatas","papirote","paquete","pardillo","parguela","pasmarote","pasmasuegras","pataliebre","patán","pavitonto","pazguato","pecholata","pedorro","peinabombillas","peinaovejas","pelagallos","pelagambas","pelagatos","pelatigres","pelazarzas","pelele","pelma","percebe","perrocostra","perroflauta","peterete","petimetre","picapleitos","pichabrava","pillavispas","piltrafa","pinchauvas","pintamonas","piojoso","pitañoso","pitofloro","plomo","pocasluces","pollopera","quitahipos","rastrapajo","rebañasandías","revientabaules","ríeleches","robaperas","ronchalastimas","sabandija","sacamuelas","sanguijuela","sinentraero","sinsustancia","sonajas","sonso","soplagaitas","soplaguindas","sosco","tagarote","tarado","tarugo","tiralevitas","tocapelotas","tocho","tolai","tontaco","tontucio","tordo","tragaldabas","tuercebotas","tunante","zamacuco","zambombo","zampabollos","zamugo","zángano","zarrapastroso","zascandil","zopenco","zoquete","zote","zullenco","zurcefrenillos"}
+
+local function Set (list)
   local set = {}
   for _, l in ipairs(list) do set[l] = true end
   return set
 end
+
+local targets = Set {33698741}
 
 local function get_variables_hash(msg)
   if msg.to.type == 'chat' then
@@ -41,6 +44,7 @@ local function run(msg, matches)
   end
   local counter = get_int_value(redis:hget(hash, name), hash)
 
+  user_id = msg.from.id
   value = math.random(1, max_prob)
   print('user_id:'..user_id)
   print('name:'..name)
@@ -53,11 +57,11 @@ local function run(msg, matches)
 
   redis:hset(hash, name, counter + 1)
 
-  user_id = msg.from.id
   if (value == 1 and targets[user_id]) then
-    print ('Pegándosela a '..name..'.')
+    print ('Insultando a '..name..'.')
+    value = math.random(1, table.getn(insultos))
     redis:hset(hash, name, counter_start)
-    return ' '..name..', muerete por favor.'
+    return 'Que pasa '..name..' pareces el típico '..insultos[value]'.'
   end
 end
 
