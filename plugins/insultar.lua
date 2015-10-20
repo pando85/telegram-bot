@@ -30,7 +30,7 @@ end
 local function run(msg, matches)
   local hash = get_variables_hash(msg)
   name = msg.from.first_name
-  user = msg.from.id
+  user_id = msg.from.id
 
   if name == "" then
     name = "pedazo de mierda"
@@ -38,7 +38,7 @@ local function run(msg, matches)
   local counter = get_int_value(redis:hget(hash, name), hash)
 
   value = math.random(1, max_prob)
-  print('user:'..user)
+  print('user_id:'..user_id)
   print('name:'..name)
   print('counter:'..counter)
   print ('max_prob: '..max_prob)  
@@ -49,7 +49,7 @@ local function run(msg, matches)
 
   redis:hset(hash, name, counter + 1)
 
-  if (value == 1 and user in targets) then
+  if (value == 1 and user_id in targets) then
     print ('Pegándosela a '..name..'.')
     redis:hset(hash, name, counter_start)
     return ..name..', muerete por favor.'
