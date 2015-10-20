@@ -2,7 +2,13 @@ local math = require('math')
 local counter_start = 0
 local max_prob = 2
 local counter_flag = 1
-local targets = {"33698741", "7055881"}
+local targets = Set {"33698741", "7055881"}
+
+function Set (list)
+  local set = {}
+  for _, l in ipairs(list) do set[l] = true end
+  return set
+end
 
 local function get_variables_hash(msg)
   if msg.to.type == 'chat' then
@@ -48,7 +54,7 @@ local function run(msg, matches)
   redis:hset(hash, name, counter + 1)
 
   user_id = msg.from.id
-  if (value == 1 and user_id in targets) then
+  if (value == 1 and targets[user_id]) then
     print ('Pegándosela a '..name..'.')
     redis:hset(hash, name, counter_start)
     return ' '..name..', muerete por favor.'
