@@ -25,10 +25,10 @@ end
 --Run
 return {
   description = "Img google",
-  usage = "/img",
+  usage = "!img",
   patterns = {
-    "^/[Ii]mg$",
-    "^/[Ii]mg (.*)$",
+    "^![Ii]mg$",
+    "^![Ii]mg (.*)$",
   },
   run = run
 }
