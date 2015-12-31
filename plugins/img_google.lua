@@ -15,7 +15,7 @@ function run(msg, matches)
   local jdat = json:decode(res)
   local numb = jdat.queries.request[1].count or '1'
   local random = math.random(1, numb)
-  local url_img = jdat.items[numb].link
+  local url_img = jdat.items[random].link
 
   send_photo_from_url(receiver, url_img)
   -- Send MSG
